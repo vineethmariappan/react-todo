@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 var allProps;
 
-function handleSubmit(e){
-  e.preventDefault();
-  allProps.addTask("hello world");
-}
+
+
 function Form(props) {
-  const [name, setName] = useState('');
   allProps = props;
+  function handleSubmit(e){
+    e.preventDefault();
+    allProps.addTask(name);
+    setName("");
+  }
+  const [name, setName] = useState('');
+  function handleChange(e) {
+    setName(e.target.value);
+  }
   return (
     <form onSubmit={handleSubmit}>
       <h2 className="label-wrapper">
@@ -22,6 +28,7 @@ function Form(props) {
         name="text"
         autoComplete="off"
         value={name}
+        onChange={handleChange}
       />
       <button type="submit" className="btn btn__primary btn__lg">
         Add
